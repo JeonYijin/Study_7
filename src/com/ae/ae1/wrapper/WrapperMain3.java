@@ -40,7 +40,7 @@ public class WrapperMain3 {
 		int checkNum =11- (num%11);
 		System.out.println(checkNum);
 		//realNum => 주민번호의 검증번호 
-		int realNum = Integer.valueOf(s[s.length-1]);
+		int realNum = Integer.valueOf(s[s.length-1]); //parseInt써보기
 		
 		if(checkNum>=10) {
 			//check2 => checkNum이 10이상일 때 다시 계산해서 검증할 번호
@@ -60,7 +60,9 @@ public class WrapperMain3 {
 		
 		
 		
-		
+		System.out.println("----------Math-----------");
+		double d = Math.random();
+		System.out.println(d);
 		
 	}
 
