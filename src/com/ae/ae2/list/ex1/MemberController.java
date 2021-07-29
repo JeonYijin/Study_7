@@ -8,12 +8,13 @@ public class MemberController {
 	private Scanner sc;
 	private MemberDAO memberDAO;
 	private ArrayList<MemberDTO> ar;
+	private MemberView memberview;
 	
 	public MemberController() {
 		sc = new Scanner(System.in);
 		memberDAO = new MemberDAO();
 		ar = memberDAO.memberInit();
-		
+		memberview = new MemberView();
 	}
 	
 	public void start() {
@@ -28,13 +29,14 @@ public class MemberController {
 		while(check) {
 			//로그인 성공하면 afterLogin
 			
-			if(MemberSession.SESSION.containsKey("member")) {
+			if(MemberSession.SESSION.get("member") != null) {//get("member") != null containsKey("member")
+				//로그인 성공 후
 				afterLogin();
+			
+			}else {
+				//로그인 전, 또는 실패
+				check = beforeLogin();
 			}
-			
-			
-			check = beforeLogin();
-			
 			
 		}
 
@@ -44,6 +46,19 @@ public class MemberController {
 		System.out.println("1. Mypage");
 		System.out.println("2. Logout");
 		
+		int select = sc.nextInt();
+		if(select ==1) {
+			System.out.println("자기 정보 출력");
+			memberview.view();
+		}else {//로그아웃하기 위해 member를 null이 되게 하는 방법
+			//1. 수정
+			//MemberSession.SESSION.put("member",null);
+			//2. 삭제
+			//MemberSession.SESSION.remove("member");
+			//3. 전체삭제
+			MemberSession.SESSION.clear();
+			System.out.println("로그아웃");
+		}
 		
 	}
 	
