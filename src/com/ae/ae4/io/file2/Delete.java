@@ -1,6 +1,8 @@
 package com.ae.ae4.io.file2;
 
 import java.io.File;
+import java.nio.file.Path;
+
 
 public class Delete {
 	
@@ -17,11 +19,39 @@ public class Delete {
 		//string[] 안에 있는 이름들을
 		File file = new File("c:\\test");
 
-		// 폴더 이름 가져오기
+		boolean result = file.exists();
+		System.out.println(result);
+		
+		//test 폴더 내의 파일 죄다 파일리스트로 부르기
+		File [] files = file.listFiles();
+		//이름 넣기
+		String[] names = file.list();
+		// 이름 조회해서 파일리스트에 넣고 출력하기
+		for(int i=0; i<names.length; i++) {
+			File file2 = new File(file, names[i]);
+			System.out.println(names[i]);
+			System.out.println("-----------");
+			
+			if(file2.isFile()) {
+				file2.delete();
+			}
+			
+			if(file2.isDirectory()) {
+				Path path = file2.toPath();
+				System.out.println("==========================");
+				System.out.println(path);
+				
+				for(int j=0; j<names.length; j++) {
+					File file3 = new File("path");
+					file3.delete();
+				}
+			}
+			
+			
+		}
 		
 		
-		
-		
+			
 		
 		
 	}
